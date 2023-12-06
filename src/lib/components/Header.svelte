@@ -8,6 +8,7 @@ const popupFocusBlur: PopupSettings = {
 	placement: 'bottom'
 };
 // Function that detects the Enter key press
+// Use this to submit forms
 function handleKeyDown(event: KeyboardEvent) {
     if (event.key === 'Enter') {
       console.log('Enter key pressed');
@@ -17,7 +18,7 @@ function handleKeyDown(event: KeyboardEvent) {
 
 <section>
     <div class="relative">
-      <input type="text" placeholder="Search" class="input w-[95%] pl-8 m-5 bg-transparent border rounded-xl outline-none border-primary-500" use:popup={popupFocusBlur} on:keydown={handleKeyDown}>
+      <input type="text" placeholder="Search" class="input w-[50%] pl-8 m-5 ml-[25%] bg-transparent border rounded-xl outline-none border-primary-500" use:popup={popupFocusBlur} on:keydown={handleKeyDown}>
       
 <div class="p-4 card variant-filled-surface" data-popup="popupFocusBlur">
 	<p>Shows on focus, hides on blur.</p>
