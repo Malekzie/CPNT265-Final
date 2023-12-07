@@ -10,16 +10,11 @@
 	import { AppShell } from '@skeletonlabs/skeleton'
 
 	// Component Imports
-	import SideBar from '$lib/components/SideBar.svelte';
 	import Header from '$lib/components/Header.svelte';
 </script>
 
 
 <AppShell>
-	<svelte:fragment slot="sidebarLeft">
-		<SideBar />
-	</svelte:fragment>
-
 	<svelte:fragment slot="pageHeader">
 		<Header/>
 	</svelte:fragment>
