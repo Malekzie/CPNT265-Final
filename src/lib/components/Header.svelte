@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { popup } from '@skeletonlabs/skeleton';
-	import type { PopupSettings } from '@skeletonlabs/skeleton';
+	import { getModalStore, popup } from '@skeletonlabs/skeleton';
+	import type { PopupSettings, ModalSettings } from '@skeletonlabs/skeleton';
+  const modalStore = getModalStore();
 
 	const popupFocusBlur: PopupSettings = {
 		event: 'focus-blur',
@@ -14,6 +15,15 @@
 			console.log('Enter key pressed');
 		}
 	}
+  const modal:ModalSettings ={
+    type: 'component',
+    component: 'modalComponentOne',
+  }
+
+  function triggerModal(){
+    modalStore.trigger(modal);
+  }
+
 </script>
 
 <section class="flex justify-between bg-slate-700">
@@ -53,9 +63,9 @@
 	</div>
   <div class="m-5 text-3xl">
     <div class="mt-3">
-      <a href="/account">
+      <button on:click={triggerModal}>
         <iconify-icon icon="gg:profile"></iconify-icon>
-      </a>
+      </button>
       <a href="/settings">
         <iconify-icon icon="material-symbols:settings"></iconify-icon>
       </a>
