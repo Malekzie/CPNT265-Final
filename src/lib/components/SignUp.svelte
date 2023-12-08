@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { SvelteComponent } from 'svelte';
-
+	import { supabase } from '@supabase/supabase-js';
 	// Stores
 	import { getModalStore } from '@skeletonlabs/skeleton';
 
@@ -30,13 +30,37 @@
 	// We've created a custom submit function to pass the response and close the modal.
 	function onFormSubmit(): void {
 		if ($modalStore[0].response) $modalStore[0].response(formData);
-		modalStore.close();
+		modalStore.close
 	}
 
 	// Base Classes
 	const cBase = 'card p-4 w-modal shadow-xl space-y-4';
 	const cHeader = 'text-2xl font-bold';
 	const cForm = 'border border-surface-500 p-4 space-y-4';
+
+  // Database Logic
+  async function signUpNewUser(){
+	  const { data, error } = await supabase.auth.signUp({
+		  email: formData.email,
+		  password: formData.password,
+		  options: {
+			  emailRedirectTo: '/account'
+		  }
+	  })
+  }
+
+async function signInUser(){
+	  const { data, error } = await supabase.auth.signIn({
+		  email: formData.email,
+		  password: formData.password,
+	  })
+  }
+
+  async function signOut() {
+  const { error } = await supabase.auth.signOut()
+}
+
+  
 </script>
 
 <!-- @component This example creates a simple form modal. -->
@@ -44,7 +68,7 @@
 {#if $modalStore[0]}
 	<div class="modal-example-form {cBase}">
 		<header class={cHeader}>{$modalStore[0].title ?? 'Luminere Scans'}</header>
-		<article>{register ? 'Register' : 'Login'}</article>
+		<article>{register ? 'Join us!' : 'Login'}</article>
 		{#if error}
 			<p class="error">We seem to be unable to find you, why not register and join us</p>
 		{/if}
@@ -56,12 +80,12 @@
 			</label>
 			<label class="label">
 				<span class={formData.password ? 'above' : 'center'}>Password</span>
-				<input bind:value={formData.password} class="input" type="text" placeholder="Enter name..." />
+				<input bind:value={formData.password} class="input" type="text" placeholder="Enter password..." />
 			</label>
 			{#if register}
 			<label class="label">
 				<span class={formData.confirmPassword ? 'above': 'center'}>Confirm Password</span>
-				<input bind:value={formData.confirmPassword} class="input" type="tel" placeholder="Enter phone..." />
+				<input bind:value={formData.confirmPassword} class="input" type="tel" placeholder="Confirm Password..." />
 			</label>
 			{/if}
 		</form>
@@ -70,12 +94,12 @@
 			{#if register}
     <div>
       <p>Already have an account?</p>
-      <button class="m-5 text-xl transition duration-200 btn variant-outline-success hover:variant-filled-warning" on:click={() => register = false}>Login</button>
+      <button class="m-5 text-xl transition duration-200 btn variant-outline-error hover:variant-filled-error" on:click={() => register = false}>Login</button>
     </div>
     {:else}
     <div>
       <p>Don't have an account?</p>
-      <button class="m-5 text-xl transition duration-200 btn variant-outline-success hover:variant-filled-warning" on:click={() => register = true}>Register</button>
+      <button class="m-5 text-xl transition duration-200 btn variant-outline-success hover:variant-filled-success" on:click={() => register = true}>Register</button>
     </div>
     {/if}
 		</div>
@@ -83,7 +107,7 @@
 		<!-- prettier-ignore -->
 		<footer class="modal-footer {parent.regionFooter}">
         <button class="btn {parent.buttonNeutral}" on:click={parent.onClose}>{parent.buttonTextCancel}</button>
-        <button class="btn {parent.buttonPositive}" on:click={onFormSubmit}>Submit Form</button>
+        <button class="btn {parent.buttonPositive}" on:click={onFormSubmit}>Submit</button>
     </footer>
 	</div>
 {/if}
