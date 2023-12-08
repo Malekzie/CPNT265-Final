@@ -1,23 +1,6 @@
 <script>
-	// import { browser } from '$app/environment';
-	// // import { onMount } from 'svelte';
-	// // import Modal from './Modal.svelte';
 
 	import Carousel from "./Carousel.svelte";
-
-	// // onMount(() => {
-	// // 	if (browser) {
-	// // 		let modal = document.getElementById('modal');
-
-	// // 		const openModal = function () {
-	// // 			modal.showModal();
-	// // 		};
-	// // 		setTimeout(openModal, 1000);
-	// // 	}
-	// // });
-
-
-
 
 </script>
 
@@ -32,9 +15,18 @@
       
 			<!-- Smaller Container -->
 			<div
-				class="w-[50%] h-[90%] my-4 mr-4 bg-green-500 rounded-tr-lg rounded-br-lg border-l-2 border-solid border-black overflow-auto"
-			>
-				<div class="flex flex-col justify-end" />
+				class="w-[50%] h-[90%] my-4 mr-4 bg-green-500 rounded-tr-lg rounded-br-lg border-l-2 border-solid border-black overflow-auto">
+				<div class="flex flex-col justify-end m-5 divide-y divide-black" >
+					<div class="">
+						<img src="images/logo.png" class="w-auto h-[5rem]" alt="logo">
+					</div>
+					<div class="">
+						<img src="images/logo.png" class="w-auto h-[5rem]" alt="logo">
+					</div>
+					<div class="">
+						<img src="images/logo.png" class="w-auto h-[5rem]" alt="logo">
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -42,6 +34,3 @@
 	<button />
 </section>
 
-<!-- <dialog id="modal" class="rounded-lg">
-  <Modal />
-</dialog> -->
