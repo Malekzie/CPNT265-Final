@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { getModalStore, popup } from '@skeletonlabs/skeleton';
+	import { popup } from '@skeletonlabs/skeleton';
 	import type { PopupSettings, ModalSettings } from '@skeletonlabs/skeleton';
-  const modalStore = getModalStore();
 
 	const popupFocusBlur: PopupSettings = {
 		event: 'focus-blur',
@@ -9,43 +8,32 @@
 		placement: 'bottom'
 	};
 	// Function that detects the Enter key press
-	// Use this to submit forms
+
 	function handleKeyDown(event: KeyboardEvent) {
-		if (event.key === 'Enter') {
-			console.log('Enter key pressed');
-		}
+		console.log('Hey');
 	}
-  const modal:ModalSettings ={
-    type: 'component',
-    component: 'modalComponentOne',
-  }
-
-  function triggerModal(){
-    modalStore.trigger(modal);
-  }
-
 </script>
 
 <section class="flex justify-between bg-slate-700">
-  <!-- Logo -->
-  <div>
-    <a href="/">
-      <img src="/images/logo.png" alt="logo" class="w-[4rem] h-auto m-5 "/>
-    </a>
-  </div>
-  <!-- Nav -->
-  <div class="my-10">
-    <ul class="flex gap-5">
-      <a href="/genres">
-        <li>Genre</li>
-      </a><a href="/bookmarks">
-        <li>Bookmarks</li>
-      </a><a href="/recruitment">
-        <li>Recruitment</li>
-      </a>
-    </ul>
-  </div>
-  <!-- Search -->
+	<!-- Logo -->
+	<div>
+		<a href="/">
+			<img src="/images/logo.png" alt="logo" class="w-[4rem] h-auto m-5" />
+		</a>
+	</div>
+	<!-- Nav -->
+	<div class="my-10">
+		<ul class="flex gap-5">
+			<a href="/genres">
+				<li>Genre</li>
+			</a><a href="/bookmarks">
+				<li>Bookmarks</li>
+			</a><a href="/recruitment">
+				<li>Recruitment</li>
+			</a>
+		</ul>
+	</div>
+	<!-- Search -->
 	<div class="relative mt-3">
 		<input
 			type="text"
@@ -59,16 +47,16 @@
 			<p>Shows on focus, hides on blur.</p>
 			<div class="arrow variant-filled-surface" />
 		</div>
-    <!-- Icons -->
+		<!-- Icons -->
 	</div>
-  <div class="m-5 text-3xl">
-    <div class="mt-3">
-      <button on:click={triggerModal}>
-        <iconify-icon icon="gg:profile"></iconify-icon>
-      </button>
-      <a href="/settings">
-        <iconify-icon icon="material-symbols:settings"></iconify-icon>
-      </a>
-    </div>
-  </div>
+	<div class="m-5 text-3xl">
+		<div class="mt-3">
+			<a href="/login">
+            <iconify-icon icon="gg:profile" />
+			</a>
+			<a href="/settings">
+				<iconify-icon icon="material-symbols:settings" />
+			</a>
+		</div>
+	</div>
 </section>

@@ -1,12 +1,11 @@
 <script lang="ts">
 	import type { SvelteComponent } from 'svelte';
-	import { supabase } from '@supabase/supabase-js';
 	// Stores
 	import { getModalStore } from '@skeletonlabs/skeleton';
 
-	// Props
 	/** Exposes parent props to this component. */
 	export let parent: SvelteComponent;
+	// Props
 
 	const modalStore = getModalStore();
 	
@@ -20,17 +19,10 @@
 	};
 
 
-	function handleAuth() {
-		if (!formData.email || !formData.password || (register && !formData.confirmPassword)) {
-			error = true;
-			return;
-		}
-	}
-
 	// We've created a custom submit function to pass the response and close the modal.
 	function onFormSubmit(): void {
 		if ($modalStore[0].response) $modalStore[0].response(formData);
-		modalStore.close
+		modalStore.close();
 	}
 
 	// Base Classes
@@ -39,28 +31,7 @@
 	const cForm = 'border border-surface-500 p-4 space-y-4';
 
   // Database Logic
-  async function signUpNewUser(){
-	  const { data, error } = await supabase.auth.signUp({
-		  email: formData.email,
-		  password: formData.password,
-		  options: {
-			  emailRedirectTo: '/account'
-		  }
-	  })
-  }
 
-async function signInUser(){
-	  const { data, error } = await supabase.auth.signIn({
-		  email: formData.email,
-		  password: formData.password,
-	  })
-  }
-
-  async function signOut() {
-  const { error } = await supabase.auth.signOut()
-}
-
-  
 </script>
 
 <!-- @component This example creates a simple form modal. -->
@@ -73,7 +44,7 @@ async function signInUser(){
 			<p class="error">We seem to be unable to find you, why not register and join us</p>
 		{/if}
 		<!-- Enable for debugging: -->
-		<form class="modal-form {cForm}">
+		<form class="modal-form {cForm}" method="POST" action="/account">
 			<label class="label">
 				<span class={formData.email ? 'above' : 'center'}>Email</span>
 				<input class="input" bind:value={formData.email} type="email" placeholder="Enter email address..." />
@@ -99,7 +70,7 @@ async function signInUser(){
     {:else}
     <div>
       <p>Don't have an account?</p>
-      <button class="m-5 text-xl transition duration-200 btn variant-outline-success hover:variant-filled-success" on:click={() => register = true}>Register</button>
+      <button class="m-5 text-xl transition duration-200 btn variant-outline-success hover:variant-filled-success" on:click={() => register = true} formaction="?/register" >Register</button>
     </div>
     {/if}
 		</div>
