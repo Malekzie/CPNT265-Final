@@ -1,12 +1,17 @@
-import { redirect }  from '@sveltejs/kit'
+// import { redirect }  from '@sveltejs/kit'
 
-export const load =  async ({ url, locals: { getSession } }) => {
-  const session = await getSession()
+// export const load =  async ({ url, locals: { getSession } }) => {
+//   const session = await getSession()
 
-  // if the user is already logged in return them to the account page
-  if (session) {
-    throw redirect(303, '/')
-  }
+//   // if the user is not logged in return them to the account page
+//   if (session) {
+//     throw redirect(303, '/')
+//   }
 
-  return { url: url.origin }
-}
+//   if (!session) {
+//     throw redirect(303, '/login')
+//   }
+
+// }
+
+// Use this code block if you want to have a preauth page before users can access any other page
