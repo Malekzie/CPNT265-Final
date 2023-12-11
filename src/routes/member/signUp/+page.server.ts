@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { message, superValidate } from 'sveltekit-superforms/server';
 import { fail } from '@sveltejs/kit';
+import type { Actions } from './$types'
 
 const schema = z.object({
   nickname: z.string().min(3),
@@ -21,9 +22,10 @@ export const load = (async () => {
   return { form };
 });
 
-export const actions = {
-  default: async ({ request }) => {
+export const actions: Actions = {
+  sveltekitForms: async ({ request, event }) => {
     const form = await superValidate(request, schema);
+      
     console.log('POST', form);
 
     // Convenient validation check:
@@ -37,9 +39,32 @@ export const actions = {
         status: 400
       });
     }
-    // TODO: Do something with the validated form.data
+    
 
     // Yep, return { form } here too
     return { form };
-  }
+  },
+  new: async ({ request, url, locals: { supabase } }) => {
+    const formData = await request.formData()
+    const email = formData.get('email')
+    const password = formData.get('password')
+    console.log(formData)
+
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        emailRedirectTo: `${url.origin}/auth/callback`,
+      },
+    })
+
+    if (error) {
+      return fail(500, { message: 'Server error. Try again later.', success: false, email })
+    }
+
+    return {
+      message: 'Please check your email for a magic link to log into the website.',
+      success: true,
+    }
+  },
 };
