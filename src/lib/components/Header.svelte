@@ -12,6 +12,8 @@
 	function handleKeyDown(event: KeyboardEvent) {
 		console.log('Hey');
 	}
+
+	
 </script>
 
 <section class="flex justify-between bg-slate-700">
@@ -51,7 +53,7 @@
 	</div>
 	<div class="m-5 text-3xl">
 		<div class="mt-3">
-			<a href="/login">
+			<a href="/member">
             <iconify-icon icon="gg:profile" />
 			</a>
 			<a href="/settings">
