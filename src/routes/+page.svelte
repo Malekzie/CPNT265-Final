@@ -6,4 +6,4 @@
 
 <Hero />
 
-<ManhwaCard />	
+
