@@ -75,10 +75,10 @@ export const actions: Actions = {
      } // else{
     
 
-    return {
-      message: 'Please check your email for a magic link to log into the website.',
-      success: true,
-      form,
-    }
+    // return {
+    //   message: 'Please check your email for a magic link to log into the website.',
+    //   success: true,
+    //   form,
+    // }}
   },
 };
