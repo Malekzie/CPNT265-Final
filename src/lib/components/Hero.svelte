@@ -19,13 +19,13 @@
 				class="w-[50%] h-[90%] my-4 mr-4 bg-[#2F3061] rounded-tr-lg rounded-br-lg border-l-2 border-solid border-white overflow-auto">
 				<div class="flex flex-col justify-end m-5 divide-y divide-white" >
 					<div class="">
-						<SmallCard/>
+						<SmallCard image="images/dragon-slay-pop.jpg"/>
 					</div>
 					<div class="">
-						<img src="images/logo.png" class="w-auto h-[5rem]" alt="logo">
+						<SmallCard image="images/bowman-cover.jpg"/>
 					</div>
 					<div class="">
-						<img src="images/logo.png" class="w-auto h-[5rem]" alt="logo">
+						<SmallCard images="/cyber-cover.jpg"/>
 					</div>
 				</div>
 			</div>
