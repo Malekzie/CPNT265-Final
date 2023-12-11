@@ -48,6 +48,7 @@ export const actions: Actions = {
     const formData = await request.formData()
     const email = formData.get('email')
     const password = formData.get('password')
+    const form = await superValidate(request, schema);
     console.log(formData)
 
     const { error } = await supabase.auth.signUp({
@@ -72,6 +73,7 @@ export const actions: Actions = {
     return {
       message: 'Please check your email for a magic link to log into the website.',
       success: true,
+      form,
     }
   },
 };
