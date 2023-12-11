@@ -48,16 +48,10 @@ export const actions: Actions = {
     const formData = await request.formData()
     const email = formData.get('email')
     const password = formData.get('password')
-<<<<<<< Updated upstream
     const form = await superValidate(request, schema);
-=======
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
     console.log(formData)
-=======
     const form = await superValidate(request, schema);
     console.log('POST', form)
->>>>>>> Stashed changes
 
     const { error } = await supabase.auth.signUp({
       email,
@@ -83,18 +77,10 @@ export const actions: Actions = {
      } // else{
     
 
-<<<<<<< Updated upstream
     return {
       message: 'Please check your email for a magic link to log into the website.',
       success: true,
       form,
     }
-=======
-    // return {
-    //   message: 'Please check your email for a magic link to log into the website.',
-    //   success: true,
-    //   form,
-    // }}
->>>>>>> Stashed changes
   },
 };
