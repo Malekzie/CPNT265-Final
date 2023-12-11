@@ -62,6 +62,13 @@ export const actions: Actions = {
       return fail(500, { message: 'Server error. Try again later.', success: false, email })
     }
 
+    if (form.data.password !== form.data.passwordConfirm) {
+      return message(form, 'Passwords do not match', {
+        status: 400
+      });
+    }
+    
+
     return {
       message: 'Please check your email for a magic link to log into the website.',
       success: true,
