@@ -19,14 +19,10 @@
   }
 </script>
 
-{#if data.session}
-<p>client-side data fetching with RLS</p>
-<pre>{JSON.stringify(loadedData, null, 2)}</pre>
-{/if}
-
 
 <!-- Be sure to remove this when deploying -->
-<SuperDebug data={$form} />
+<!-- Remember to ddd -->
+<!-- <SuperDebug data={$form} /> -->
 
 <section class="flex items-center justify-center h-screen">
 	<div class="w-full max-w-2xl p-10 rounded-lg bg-slate-700">
@@ -75,8 +71,10 @@
                 {...$constraints.passwordConfirm}
 				class="block w-full p-2 mb-2 text-black border rounded-md"
 			/>
-            {#if $errors.passwordConfirm}
-                <p class="text-red-500">Passwords did not match</p>
+            {#if $message}
+                <div class:success={$message.status == 'success'} class:error={$message.status == 'error'}>
+									<p class="text-red-500">Passwords did not match</p>
+								</div>
             {/if}
 
 			<div class="mt-4">

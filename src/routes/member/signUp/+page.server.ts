@@ -9,7 +9,7 @@ const schema = z.object({
   password: z.string().min(6),
   passwordConfirm: z.string().min(6),
 })
-.refine((data) => data.password === data.passwordConfirm, {
+.refine( async (data) => data.password === data.passwordConfirm, {
   message: "Passwords do not match",
   path: ["passwordConfirm"],
   });
@@ -48,14 +48,22 @@ export const actions: Actions = {
     const formData = await request.formData()
     const email = formData.get('email')
     const password = formData.get('password')
+<<<<<<< Updated upstream
     const form = await superValidate(request, schema);
+=======
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
     console.log(formData)
+=======
+    const form = await superValidate(request, schema);
+    console.log('POST', form)
+>>>>>>> Stashed changes
 
     const { error } = await supabase.auth.signUp({
       email,
       password,
       options: {
-        emailRedirectTo: `${url.origin}/auth/callback`,
+        emailRedirectTo: `${url.origin}/member/auth/callback?next=/member/signIn`,
       },
     })
 
@@ -63,17 +71,30 @@ export const actions: Actions = {
       return fail(500, { message: 'Server error. Try again later.', success: false, email })
     }
 
+    if (!form.valid) {
+      // Again, return { form } and things will just work.
+      return fail(400, { form });
+    }
+
     if (form.data.password !== form.data.passwordConfirm) {
       return message(form, 'Passwords do not match', {
-        status: 400
+        status: 403
       });
-    }
+     } // else{
     
 
+<<<<<<< Updated upstream
     return {
       message: 'Please check your email for a magic link to log into the website.',
       success: true,
       form,
     }
+=======
+    // return {
+    //   message: 'Please check your email for a magic link to log into the website.',
+    //   success: true,
+    //   form,
+    // }}
+>>>>>>> Stashed changes
   },
 };
