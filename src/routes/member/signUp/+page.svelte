@@ -3,15 +3,34 @@
 	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte'; //A debug component to see the form data
 	export let data;
 
+    let { supabase } = data;
+    $: ({ supabase } = data)
+
 	const { form, errors, constraints, enhance, message } = superForm(data.form);
+
+  let loadedData = []
+  async function loadData() {
+    const { data: result } = await data.supabase.from('test').select('*').limit(20)
+    loadedData = result
+  }
+
+  $: if (data.session) {
+    loadData()
+  }
 </script>
+
+{#if data.session}
+<p>client-side data fetching with RLS</p>
+<pre>{JSON.stringify(loadedData, null, 2)}</pre>
+{/if}
+
 
 <!-- Be sure to remove this when deploying -->
 <SuperDebug data={$form} />
 
 <section class="flex items-center justify-center h-screen">
 	<div class="w-full max-w-2xl p-10 rounded-lg bg-slate-700">
-		<form method="POST" class="m-5" use:enhance>
+		<form method="POST" class="m-5" action="?/new" use:enhance>
 			<label for="name" class="text-white">Nickname</label>
 			<input
 				type="text"
@@ -66,3 +85,8 @@
 		</form>
 	</div>
 </section>
+<!-- 
+<section class="flex flex-col items-center justify-center m-10">
+    <h2 class="text-5xl">OAuth with GitHub</h2>
+    <button class="w-[30%] p-5 bg-slate-700 rounded-lg" on:click={signInWithGithub}><iconify-icon icon="icon-park:github" class="text-2xl"></iconify-icon></button>
+</section> -->
