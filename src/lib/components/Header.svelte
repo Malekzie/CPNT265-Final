@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { popup } from '@skeletonlabs/skeleton';
 	import type { PopupSettings, ModalSettings } from '@skeletonlabs/skeleton';
-
+	import { redirect } from '@sveltejs/kit';
 	const popupFocusBlur: PopupSettings = {
 		event: 'focus-blur',
 		target: 'popupFocusBlur',
@@ -14,6 +14,11 @@
 	}
 
 	
+export const session =  async ({ locals: { getSession } }) => {
+  const session = await getSession()
+}
+
+
 </script>
 
 <section class="flex justify-between bg-slate-700">
@@ -56,6 +61,7 @@
 			<a href="/member">
             <iconify-icon icon="gg:profile" />
 			</a>
+
 			<a href="/settings">
 				<iconify-icon icon="material-symbols:settings" />
 			</a>

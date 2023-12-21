@@ -8,25 +8,16 @@
 
 	const { form, errors, constraints, enhance, message } = superForm(data.form);
 
-  let loadedData = []
-  async function loadData() {
-    const { data: result } = await data.supabase.from('test').select('*').limit(20)
-    loadedData = result
-  }
-
-  $: if (data.session) {
-    loadData()
-  }
 </script>
 
 
 <!-- Be sure to remove this when deploying -->
 <!-- Remember to ddd -->
-<!-- <SuperDebug data={$form} /> -->
+<SuperDebug data={$form} />
 
 <section class="flex items-center justify-center h-screen">
 	<div class="w-full max-w-2xl p-10 rounded-lg bg-slate-700">
-		<form method="POST" class="m-5" action="?/new" use:enhance>
+		<form method="POST" class="m-5" action="?/old" use:enhance>
 			<label for="name" class="text-white">Nickname</label>
 			<input
 				type="text"

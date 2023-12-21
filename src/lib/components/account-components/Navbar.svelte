@@ -1,4 +1,7 @@
 <script>
+    async function signOut() {
+  const { error } = await supabase.auth.signOut()
+}
 </script>
 
 <section>
@@ -13,6 +16,9 @@
             </a><a href="/" class="p-5 transition delay-75 border border-solid hover:scale-105">
                 <li>Account</li>
             </a>
+            <li>
+                <button class="p-5 transition delay-75 border border-solid hover:scale-105" on:click={signOut}>Logout</button>
+            </li>
         </ul>
     </div>
 </section>

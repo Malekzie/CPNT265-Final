@@ -1,4 +1,5 @@
 <script>
+	import { supabase } from '$lib/supabaseClient';
 	import { Ratings } from '@skeletonlabs/skeleton';
 	let rating = 3.5;
 	let status = "Ongoing";
@@ -6,6 +7,8 @@
 	let title = "Title"
   let description = "Lorem"
   let chapter = 1
+
+	
 </script>
 
 <section class="h-screen m-5 border border-solid rounded-lg grids bg-[#2F3061] text-[#FFE66D]">
@@ -15,7 +18,7 @@
 		</div>
 		<div class="max-w-[20rem] flex flex-col items-center">
 
-			<button class="p-2 mx-auto rounded-lg w-52 variant-outline-primary">Bookmark</button>
+			<button class="p-2 mx-auto rounded-lg w-52 variant-outline-primary hover:variant-outline-warning">Bookmark</button>
 
 			<div class="flex justify-around px-10 py-2 my-2 rounded-md bg-[#7F7B82]">
 				<Ratings bind:value={rating} max={5}>
@@ -34,7 +37,7 @@
 				<p class="ml-10">{status}</p>
 			</div>
 			<div class="flex justify-around px-10 py-2 my-2 rounded-md bg-[#7F7B82]">
-				<h1>Author:</h1>
+				<h1>:{data.author}</h1>
 				<p class="ml-10">{author}</p>
 			</div>
 		</div>

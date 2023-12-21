@@ -2,7 +2,6 @@
 
 	import Carousel from "./Carousel.svelte";
 	import SmallCard from "./SmallCard.svelte";
-
 </script>
 
 <section>
@@ -29,6 +28,8 @@
 					</div>
 				</div>
 			</div>
+
+			
 		</div>
 	</div>
 

@@ -14,7 +14,7 @@
     <h1 class="text-xl">{title}</h1>
     <a href="/" class="text-sm">{recentChapter}</a>
     <div class="flex">
-      <Ratings bind:value={rating.current} max={rating.max} spacing="spacing-x-2" interactive="true" fill="fill-yellow-300">
+      <Ratings bind:value={rating.current} max={rating.max} spacing="spacing-x-2" justify="justify-start" interactive="true" fill="fill-yellow-300">
         <svelte:fragment slot="empty"
           ><iconify-icon icon="material-symbols:star-outline" /></svelte:fragment
         >

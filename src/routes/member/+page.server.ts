@@ -5,11 +5,11 @@ export const load =  async ({ locals: { getSession } }) => {
 
   // if the user is not logged in return them to the account page
   if (session) {
-    throw redirect(303, '/member/signIn')
+    throw redirect(303, '/account')
   }
   
   if (!session) {
-    throw redirect(303, '/member/signUp')
+    throw redirect(303, '/member/signIn')
   }
   
 }

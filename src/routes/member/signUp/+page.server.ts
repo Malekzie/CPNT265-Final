@@ -22,32 +22,33 @@ export const load = (async () => {
   return { form };
 });
 
+old: async ({ request, event }) => {
+  const form = await superValidate(request, schema);
+    
+  console.log('POST', form);
+
+  // Convenient validation check:
+  if (!form.valid) {
+    // Again, return { form } and things will just work.
+    return fail(400, { form });
+  }
+  
+  if (form.data.password !== form.data.passwordConfirm) {
+    return message(form, 'Passwords do not match', {
+      status: 400
+    });
+  }
+  
+
+  // Yep, return { form } here too
+  return { form };
+},
 export const actions: Actions = {
-  sveltekitForms: async ({ request, event }) => {
-    const form = await superValidate(request, schema);
-      
-    console.log('POST', form);
-
-    // Convenient validation check:
-    if (!form.valid) {
-      // Again, return { form } and things will just work.
-      return fail(400, { form });
-    }
-    
-    if (form.data.password !== form.data.passwordConfirm) {
-      return message(form, 'Passwords do not match', {
-        status: 400
-      });
-    }
-    
-
-    // Yep, return { form } here too
-    return { form };
-  },
   new: async ({ request, url, locals: { supabase } }) => {
     const formData = await request.formData()
     const email = formData.get('email')
     const password = formData.get('password')
+    const confirmPassword = formData.get('confirmPassword')
     const form = await superValidate(request, schema);
     console.log('POST', form)
 
@@ -68,17 +69,10 @@ export const actions: Actions = {
       return fail(400, { form });
     }
 
-    if (form.data.password !== form.data.passwordConfirm) {
-      return message(form, 'Passwords do not match', {
-        status: 403
-      });
-     } // else{
-    
+    if (password !== confirmPassword){
+      throw error(400, { message: 'Passwords do not match', success: false, email })
+    }
 
-    // return {
-    //   message: 'Please check your email for a magic link to log into the website.',
-    //   success: true,
-    //   form,
-    // }}
+
   },
 };
